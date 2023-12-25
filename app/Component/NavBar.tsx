@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
-import { IoLogoIonitron } from "react-icons/io";
 import classnames from "classnames";
+import Image from "next/image";
 
 const NavBar = () => {
   const links = [
@@ -15,7 +15,13 @@ const NavBar = () => {
   return (
     <nav className="flex items-center space-x-5 border-b-2 mb-5 h-14 px-5 ">
       <Link href="/">
-        <IoLogoIonitron />
+        <Image
+          src="/IssueLogo.png"
+          alt="logo"
+          style={{ width: "auto" }}
+          height={30}
+          width={30}
+        />
       </Link>
       <ul className="flex space-x-5">
         {links.map((link) => (

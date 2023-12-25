@@ -7,11 +7,6 @@ const issueSchema = z.object({
   description: z.string().min(3).max(255),
 });
 
-export async function GET(request: NextRequest) {
-  const issues = await prisma.issue.findMany();
-  return NextResponse.json(issues);
-}
-
 export async function POST(request: NextRequest) {
   const issues = await request.json();
   const validation = issueSchema.safeParse(issues);
