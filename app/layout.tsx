@@ -27,7 +27,7 @@ export default function RootLayout({
           radius="large"
         >
           <NavBar />
-          <main>{children}</main>
+          <main className="p-5">{children}</main>
         </Theme>
       </body>
     </html>
