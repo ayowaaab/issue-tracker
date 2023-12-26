@@ -1,8 +1,8 @@
 import { Button } from "@radix-ui/themes";
 import Link from "next/link";
 import React from "react";
-import Filter from "../Component/Filter";
-import IssuesTable from "../Component/IssuesTable";
+import Filter from "../Components/Filter";
+import IssuesTable from "../Components/IssuesTable";
 
 const IssuePage = () => {
   return (

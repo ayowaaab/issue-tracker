@@ -10,6 +10,8 @@ import { InfoCircledIcon } from "@radix-ui/react-icons";
 import { issueSchema } from "@/app/validationSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import ErrorMessage from "@/app/Components/ErrorMessage";
+import Spinner from "@/app/Components/Spinner";
 
 type issue = z.infer<typeof issueSchema>;
 
@@ -24,6 +26,7 @@ const NewIssue = () => {
   });
   const route = useRouter();
   const [err, setErr] = useState("");
+  const [isSubmetting, setIsSubmetting] = useState(false);
 
   return (
     <div>
@@ -38,9 +41,11 @@ const NewIssue = () => {
       <form
         onSubmit={handleSubmit(async (data) => {
           try {
+            setIsSubmetting(true)
             await axios.post("/api/issues", data);
             route.push("/issues");
           } catch (error) {
+            setIsSubmetting(false)
             setErr("Unexpected Error Appeared");
           }
         })}
@@ -52,7 +57,7 @@ const NewIssue = () => {
             {...register("title")}
           />
         </TextField.Root>
-        {errors.title && <Text color="red" as="p">{errors.title.message}</Text>}
+        <ErrorMessage>{errors.title?.message}</ErrorMessage>
         <Controller
           name="description"
           control={control}
@@ -60,11 +65,9 @@ const NewIssue = () => {
             <SimpleMDE placeholder="Write your description…" {...field} />
           )}
         />
-        {errors.description && (
-          <Text color="red" as="p">{errors.description.message}</Text>
-        )}
+        <ErrorMessage>{errors.description?.message}</ErrorMessage>
 
-        <Button type="submit">Submit new issue</Button>
+        <Button type="submit">Submit new issue {isSubmetting&&<Spinner />}</Button>
       </form>
     </div>
   );
