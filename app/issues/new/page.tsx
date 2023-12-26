@@ -28,6 +28,17 @@ const NewIssue = () => {
   const [err, setErr] = useState("");
   const [isSubmetting, setIsSubmetting] = useState(false);
 
+  const onSubmit = handleSubmit(async (data) => {
+    try {
+      setIsSubmetting(true);
+      await axios.post("/api/issues", data);
+      route.push("/issues");
+    } catch (error) {
+      setIsSubmetting(false);
+      setErr("Unexpected Error Appeared");
+    }
+  });
+
   return (
     <div>
       {err && (
@@ -38,19 +49,7 @@ const NewIssue = () => {
           <Callout.Text>{err}</Callout.Text>
         </Callout.Root>
       )}
-      <form
-        onSubmit={handleSubmit(async (data) => {
-          try {
-            setIsSubmetting(true)
-            await axios.post("/api/issues", data);
-            route.push("/issues");
-          } catch (error) {
-            setIsSubmetting(false)
-            setErr("Unexpected Error Appeared");
-          }
-        })}
-        className="max-w-xl space-y-3"
-      >
+      <form onSubmit={onSubmit} className="max-w-xl space-y-3">
         <TextField.Root>
           <TextField.Input
             placeholder="Write your title…"
@@ -67,7 +66,9 @@ const NewIssue = () => {
         />
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
 
-        <Button type="submit">Submit new issue {isSubmetting&&<Spinner />}</Button>
+        <Button type="submit">
+          Submit new issue {isSubmetting && <Spinner />}
+        </Button>
       </form>
     </div>
   );
