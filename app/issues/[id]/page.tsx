@@ -1,3 +1,4 @@
+import { Badge } from "@radix-ui/themes";
 import { notFound } from "next/navigation";
 
 interface Props {
@@ -8,19 +9,17 @@ const IssueDetailPage = async ({ params }: Props) => {
     where: { id: parseInt(params.id) },
   });
   if (!issue) notFound();
-  const convertDate = (date: Date) => {
-    var month = date.getMonth() + 1,
-      year = date.getFullYear(),
-      day = date.getDate();
-    return day + "/" + month + "/" + year;
-  };
+
   return (
     <>
-      <h1>{issue.title}</h1>
-      <h1>{issue.description}</h1>
-      <h1>{convertDate(issue.createdAt)}</h1>
-      <h1>{issue.status}</h1>
-      <h1>{convertDate(issue.updatedAt)}</h1>
+      <div className="flex flex-col gap-3">
+        <h1 className="text-3xl font-bold capitalize">{issue.title}</h1>
+        <div className="flex gap-5">
+          <Badge>{issue.status}</Badge>
+          <h1 className=" font-medium">{issue.createdAt.toDateString()}</h1>
+        </div>
+        <h1 className="border border-stone-400 rounded-md p-3">{issue.description}</h1>
+      </div>
     </>
   );
 };
