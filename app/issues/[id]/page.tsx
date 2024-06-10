@@ -1,5 +1,6 @@
-import { Badge } from "@radix-ui/themes";
+import { Badge, Card } from "@radix-ui/themes";
 import { notFound } from "next/navigation";
+import ReactMarkdown from "react-markdown";
 
 interface Props {
   params: { id: string };
@@ -18,7 +19,11 @@ const IssueDetailPage = async ({ params }: Props) => {
           <Badge>{issue.status}</Badge>
           <h1 className=" font-medium">{issue.createdAt.toDateString()}</h1>
         </div>
-        <h1 className="border border-stone-400 rounded-md p-3">{issue.description}</h1>
+        <Card className="prose">
+          <ReactMarkdown >
+            {issue.description}
+          </ReactMarkdown>
+        </Card>
       </div>
     </>
   );
