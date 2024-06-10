@@ -2,6 +2,7 @@ import prisma from "@/prisma/db";
 import { Badge, Table } from "@radix-ui/themes";
 import BadgeIssue from "./BadgeIssue";
 import { Status } from "@prisma/client";
+import Link from "next/link";
 
 interface IssuesProps {
   id: number;
@@ -34,7 +35,9 @@ const IssuesTable = async () => {
             <Table.Row key={issue.id}>
               <Table.RowHeaderCell>
                 <div className="flex gap-5">
+                  <Link href={`/issues/${issue.id}`}>
                   {issue.title}
+                  </Link>
                   <div className="md:hidden">
                     <BadgeIssue status={issue.status} />
                   </div>
