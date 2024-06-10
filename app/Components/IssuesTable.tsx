@@ -1,8 +1,9 @@
 import prisma from "@/prisma/db";
-import { Badge, Table } from "@radix-ui/themes";
-import BadgeIssue from "./BadgeIssue";
 import { Status } from "@prisma/client";
-import Link from "next/link";
+import { Table } from "@radix-ui/themes";
+import BadgeIssue from "./BadgeIssue";
+import Link from "./Link";
+
 
 interface IssuesProps {
   id: number;
