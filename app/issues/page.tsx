@@ -1,6 +1,6 @@
-import Filter from "../Components/Filter";
-import IssueAction from "../Components/IssueAction";
-import IssuesTable from "../Components/IssuesTable";
+import Filter from "../components/Filter";
+import IssueAction from "../components/IssueAction";
+import IssuesTable from "../components/IssuesTable";
 
 const IssuePage = async () => {
   return (

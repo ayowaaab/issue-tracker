@@ -1,5 +1,4 @@
-import { Skeleton } from "@/app/Components";
-
+import { Skeleton } from "@/app/components";
 
 const LoadingNewIssue = async () => {
   <>

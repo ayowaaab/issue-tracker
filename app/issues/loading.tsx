@@ -1,7 +1,7 @@
+import { Skeleton } from "@/app/components";
 import { Table } from "@radix-ui/themes";
-import Filter from "../Components/Filter";
-import IssueAction from "../Components/IssueAction";
-import { Skeleton } from "@/app/Components";
+import Filter from "../components/Filter";
+import IssueAction from "../components/IssueAction";
 const LoadingIssuesPage = () => {
   const issues = [1, 2, 3];
   return (

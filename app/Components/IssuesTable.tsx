@@ -1,7 +1,7 @@
+import { BadgeIssue, Link } from "@/app/components";
 import prisma from "@/prisma/db";
 import { Status } from "@prisma/client";
 import { Table } from "@radix-ui/themes";
-import { BadgeIssue, Link } from "@/app/Components";
 
 interface IssuesProps {
   id: number;

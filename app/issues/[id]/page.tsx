@@ -1,6 +1,6 @@
 import { Box, Grid } from "@radix-ui/themes";
 import { notFound } from "next/navigation";
-import IssueEditButton from "./issueEditButton";
+import IssueEditButton from "./IssueEditButton";
 import IssueDetails from "./IssueDetails";
 
 interface IParams {

@@ -1,6 +1,5 @@
+import { Skeleton } from "@/app/components";
 import { Box } from "@radix-ui/themes";
-import { Skeleton } from "@/app/Components";
-
 
 const IssueLoadingDetail = async () => {
   return (
