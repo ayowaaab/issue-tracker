@@ -1,9 +1,7 @@
 import prisma from "@/prisma/db";
 import { Status } from "@prisma/client";
 import { Table } from "@radix-ui/themes";
-import BadgeIssue from "./BadgeIssue";
-import Link from "./Link";
-
+import { BadgeIssue, Link } from "@/app/Components";
 
 interface IssuesProps {
   id: number;
@@ -14,7 +12,9 @@ interface IssuesProps {
 }
 
 const IssuesTable = async () => {
-  const issues: IssuesProps[] = await prisma.issue.findMany({orderBy:{createdAt:"desc"}});
+  const issues: IssuesProps[] = await prisma.issue.findMany({
+    orderBy: { createdAt: "desc" },
+  });
 
   return (
     <>
@@ -36,9 +36,7 @@ const IssuesTable = async () => {
             <Table.Row key={issue.id}>
               <Table.RowHeaderCell>
                 <div className="flex gap-5">
-                  <Link href={`/issues/${issue.id}`}>
-                  {issue.title}
-                  </Link>
+                  <Link href={`/issues/${issue.id}`}>{issue.title}</Link>
                   <div className="md:hidden">
                     <BadgeIssue status={issue.status} />
                   </div>
