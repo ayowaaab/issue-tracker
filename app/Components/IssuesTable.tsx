@@ -14,7 +14,7 @@ interface IssuesProps {
 }
 
 const IssuesTable = async () => {
-  const issues: IssuesProps[] = await prisma.issue.findMany();
+  const issues: IssuesProps[] = await prisma.issue.findMany({orderBy:{createdAt:"desc"}});
 
   return (
     <>
