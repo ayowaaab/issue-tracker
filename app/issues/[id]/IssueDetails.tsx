@@ -11,7 +11,7 @@ const IssueDetails = ({ issue }: { issue: issue }) => {
         <Badge>{issue.status}</Badge>
         <Text>{issue.createdAt.toDateString()}</Text>
       </Flex>
-      <Card className="prose" mt={"4"}>
+      <Card className="prose max-w-full" mt={"4"}>
         <ReactMarkdown>{issue.description}</ReactMarkdown>
       </Card>
     </>
