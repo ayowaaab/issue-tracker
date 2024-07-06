@@ -31,6 +31,7 @@ export default function RootLayout({
           radius="large"
         >
           <NavBar />
+          <div className="w-[95vw] mx-auto bg-slate-300 h-[1px] my-5" />
           <main className="p-5">{children}</main>
         </Theme>
       </body>

@@ -13,14 +13,13 @@ const NavBar = () => {
   ];
   const currentPath = usePathname();
   return (
-    <nav className="flex items-center space-x-5 border-b-2 mb-5 h-14 px-5 ">
-      <Link href="/">
+    <nav className="flex items-center space-x-5 mb-5 h-14 px-5 ">
+      <Link href="/" className="mr-6">
         <Image
           src="/IssueLogo.png"
           alt="logo"
-          style={{ width: "auto" }}
-          height={30}
-          width={30}
+          height={100}
+          width={100}
         />
       </Link>
       <ul className="flex space-x-5">
@@ -29,7 +28,7 @@ const NavBar = () => {
             key={link.href}
             className={classnames({
               "text-gray-500": link.href !== currentPath,
-              "text-gray-900": link.href === currentPath,
+              "text-gray-900 font-semibold": link.href === currentPath,
               "hover:text-gray-900 transition-colors": true,
             })}
             href={link.href}
