@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const IssueEditButton = ({ issue }: { issue: issue }) => {
   return (
-    <Button style={{ cursor: "pointer" }} >
+    <Button style={{ cursor: "pointer" }} color="green" >
       <Pencil2Icon />
       <Link href={`/issues/${issue.id}/edit`}>Edit Issue</Link>
     </Button>

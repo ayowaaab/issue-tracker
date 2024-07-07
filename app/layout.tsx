@@ -25,10 +25,7 @@ export default function RootLayout({
     <html suppressHydrationWarning lang="en">
       <body className={inter.variable}>
         <Theme
-          appearance="light"
-          accentColor="jade"
-          grayColor="mauve"
-          radius="large"
+        
         >
           <NavBar />
           <div className="w-[95vw] mx-auto bg-slate-300 h-[1px] my-5" />
