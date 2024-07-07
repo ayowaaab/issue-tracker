@@ -6,7 +6,14 @@ import React from "react";
 import classnames from "classnames";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
-import { Box, Container, Flex } from "@radix-ui/themes";
+import {
+  Avatar,
+  Box,
+  Container,
+  DropdownMenu,
+  Flex,
+  Text,
+} from "@radix-ui/themes";
 
 const NavBar = () => {
   const links = [
@@ -41,7 +48,25 @@ const NavBar = () => {
         </Flex>
         <Box>
           {status === "authenticated" && (
-            <Link href="/api/auth/signout">Logout</Link>
+            <DropdownMenu.Root>
+              <DropdownMenu.Trigger>
+                <Avatar
+                  className="cursor-pointer"
+                  size={"2"}
+                  radius="full"
+                  src={session.user!.image!}
+                  fallback="?"
+                />
+              </DropdownMenu.Trigger>
+              <DropdownMenu.Content>
+                <DropdownMenu.Label>
+                  <Text>{session.user!.email}</Text>
+                </DropdownMenu.Label>
+                <DropdownMenu.Item>
+                  <Link href="/api/auth/signout">Logout</Link>
+                </DropdownMenu.Item>
+              </DropdownMenu.Content>
+            </DropdownMenu.Root>
           )}
           {status === "unauthenticated" && (
             <Link href="/api/auth/signin">Login</Link>
