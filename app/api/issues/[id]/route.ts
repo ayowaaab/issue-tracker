@@ -1,5 +1,6 @@
 import { issueSchema } from "@/app/validationSchema";
 import prisma from "@/prisma/db";
+import delay from "delay";
 import { NextResponse } from "next/server";
 
 interface IParams {
@@ -38,8 +39,9 @@ export async function DELETE(request: Request, { params: { id } }: IParams) {
     });
     if (!issue) return new NextResponse("Invalid ID", { status: 404 });
 
+
     await prisma.issue.delete({ where: { id: parseInt(id) } });
-    return {};
+    return NextResponse.json({});
     
   } catch (error: any) {
     console.log(error, "Error Message");
