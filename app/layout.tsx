@@ -2,6 +2,7 @@ import { Theme } from "@radix-ui/themes";
 import "@radix-ui/themes/styles.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import AuthProvider from "./auth/Provider";
 import NavBar from "./components/NavBar";
 import "./globals.css";
 import "./theme-config.css";
@@ -24,13 +25,13 @@ export default function RootLayout({
   return (
     <html suppressHydrationWarning lang="en">
       <body className={inter.variable}>
-        <Theme
-        
-        >
-          <NavBar />
-          <div className="w-[95vw] mx-auto bg-slate-300 h-[1px] my-5" />
-          <main className="p-5">{children}</main>
-        </Theme>
+        <AuthProvider>
+          <Theme>
+            <NavBar />
+            <div className="w-[95vw] mx-auto bg-slate-300 h-[1px] my-5" />
+            <main className="p-5">{children}</main>
+          </Theme>
+        </AuthProvider>
       </body>
     </html>
   );
