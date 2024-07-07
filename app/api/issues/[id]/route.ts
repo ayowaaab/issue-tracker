@@ -31,3 +31,18 @@ export async function PATCH(request: Request, { params: { id } }: IParams) {
     return new NextResponse("Internal Error", { status: 500 });
   }
 }
+export async function DELETE(request: Request, { params: { id } }: IParams) {
+  try {
+    const issue = await prisma.issue.findUnique({
+      where: { id: parseInt(id) },
+    });
+    if (!issue) return new NextResponse("Invalid ID", { status: 404 });
+
+    await prisma.issue.delete({ where: { id: parseInt(id) } });
+    return {};
+    
+  } catch (error: any) {
+    console.log(error, "Error Message");
+    return new NextResponse("Internal Error", { status: 500 });
+  }
+}
