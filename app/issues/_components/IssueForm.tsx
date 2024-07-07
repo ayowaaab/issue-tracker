@@ -5,7 +5,7 @@ import { issueSchema } from "@/app/validationSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { issue } from "@prisma/client";
 import { InfoCircledIcon } from "@radix-ui/react-icons";
-import { Button, Callout, TextField } from "@radix-ui/themes";
+import { Button, Callout, Container, TextField } from "@radix-ui/themes";
 import axios from "axios";
 import "easymde/dist/easymde.min.css";
 import dynamic from "next/dynamic";
@@ -49,7 +49,7 @@ const IssueForm: React.FC<Props> = ({ issue }) => {
   });
 
   return (
-    <div>
+    <Container>
       {err && (
         <Callout.Root color="red" className="max-w-xl mb-5">
           <Callout.Icon>
@@ -82,7 +82,7 @@ const IssueForm: React.FC<Props> = ({ issue }) => {
           {isSubmetting && <Spinner />}
         </Button>
       </form>
-    </div>
+    </Container>
   );
 };
 
