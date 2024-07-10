@@ -4,6 +4,7 @@ import { Select } from "@radix-ui/themes";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Skeleton } from "@/app/components";
+import toast, { Toaster } from "react-hot-toast";
 
 const AssigneeSelect = ({ issue }: { issue: issue }) => {
   const {
@@ -20,27 +21,33 @@ const AssigneeSelect = ({ issue }: { issue: issue }) => {
   if (error) return null;
 
   return (
-    <Select.Root
-    defaultValue={issue.assignedToUserId || "Unassigned"}
-      onValueChange={async (userId) => {
-        await axios.patch(`/api/issues/${issue.id}`, {
-          assignedToUserId: userId == "Unassigned" ? null : userId,
-        });
-      }}
-    >
-      <Select.Trigger placeholder={"Assign..."} />
-      <Select.Content>
-        <Select.Group>
-          <Select.Label>Suggestions</Select.Label>
-          <Select.Item value="Unassigned">Unassigned</Select.Item>
-          {users?.map((u) => (
-            <Select.Item key={u.id} value={u.id}>
-              {u.name}
-            </Select.Item>
-          ))}
-        </Select.Group>
-      </Select.Content>
-    </Select.Root>
+    <>
+    <Toaster  />
+ 
+      <Select.Root
+        defaultValue={issue.assignedToUserId || "Unassigned"}
+        onValueChange={async (userId) => {
+          await axios.patch(`/api/issues/${issue.id}`, {
+            assignedToUserId: userId == "Unassigned" ? null : userId,
+          })
+          .then(()=> toast.success('Issue Assigned Successfully'))
+          .catch(()=> toast.error('Issue Could not be Assigned.'));
+        }}
+      >
+        <Select.Trigger placeholder={"Assign..."} />
+        <Select.Content>
+          <Select.Group>
+            <Select.Label>Suggestions</Select.Label>
+            <Select.Item value="Unassigned">Unassigned</Select.Item>
+            {users?.map((u) => (
+              <Select.Item key={u.id} value={u.id}>
+                {u.name}
+              </Select.Item>
+            ))}
+          </Select.Group>
+        </Select.Content>
+      </Select.Root>
+    </>
   );
 };
 
