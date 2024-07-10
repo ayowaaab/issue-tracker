@@ -1,6 +1,7 @@
 "use client";
 import { Status } from "@prisma/client";
 import { Select } from "@radix-ui/themes";
+import { useRouter } from "next/navigation";
 
 const Filter = () => {
   const statuses: { label: string; value?: Status }[] = [
@@ -9,9 +10,13 @@ const Filter = () => {
     { label: "In Progresse", value: "IN_PROGRESS" },
     { label: "closed", value: "CLOSED" },
   ];
+  const router = useRouter();
   return (
     <Select.Root
-      onValueChange={() => console.log("")}
+      onValueChange={(status) => {
+        const query = status ? `?status=${status}` : "";
+        router.push(`/issues${query}`);
+      }}
       size={"2"}
       defaultValue="all"
     >

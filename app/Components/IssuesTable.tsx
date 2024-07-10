@@ -1,21 +1,35 @@
 import { BadgeIssue, Link } from "@/app/components";
-import prisma from "@/prisma/db";
-import { Status } from "@prisma/client";
+import { issue } from "@prisma/client";
+
 import { Table } from "@radix-ui/themes";
 
-interface IssuesProps {
-  id: number;
-  title: string;
-  status: Status;
-  createdAt: Date;
-  updatedAt: Date;
-}
+const IssuesTable = async ({ issues }: { issues: issue[] }) => {
+  if (issues.length == 0)
+    return (
+      <>
+        <Table.Root variant="surface">
+          <Table.Header>
+            <Table.Row>
+              <Table.ColumnHeaderCell>Issues</Table.ColumnHeaderCell>
+              <Table.ColumnHeaderCell className="hidden md:table-cell">
+                Status
+              </Table.ColumnHeaderCell>
+              <Table.ColumnHeaderCell className="hidden md:table-cell">
+                Created
+              </Table.ColumnHeaderCell>
+            </Table.Row>
+          </Table.Header>
 
-const IssuesTable = async () => {
-  const issues: IssuesProps[] = await prisma.issue.findMany({
-    orderBy: { createdAt: "desc" },
-  });
-
+          <Table.Body>
+            <Table.Row>
+              <Table.Cell className="hidden md:table-cell">
+                No Data ❌
+              </Table.Cell>
+            </Table.Row>
+          </Table.Body>
+        </Table.Root>
+      </>
+    );
   return (
     <>
       <Table.Root variant="surface">
