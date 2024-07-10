@@ -7,32 +7,26 @@ import { Skeleton } from "@/app/components";
 import toast, { Toaster } from "react-hot-toast";
 
 const AssigneeSelect = ({ issue }: { issue: issue }) => {
-  const {
-    data: users,
-    error,
-    isLoading,
-  } = useQuery<User[]>({
-    queryKey: ["users"],
-    queryFn: () => axios.get("/api/users").then((res) => res.data),
-    staleTime: 60 * 1000, //60s
-    retry: 3,
-  });
+  const { data: users, error, isLoading } = useUsers();
+
   if (isLoading) return <Skeleton />;
   if (error) return null;
 
+  const handelAssignUsers = async (userId: string) => {
+    await axios
+      .patch(`/api/issues/${issue.id}`, {
+        assignedToUserId: userId == "Unassigned" ? null : userId,
+      })
+      .then(() => toast.success("Issue Assigned Successfully"))
+      .catch(() => toast.error("Issue Could not be Assigned."));
+  };
   return (
     <>
-    <Toaster  />
- 
+      <Toaster />
+
       <Select.Root
         defaultValue={issue.assignedToUserId || "Unassigned"}
-        onValueChange={async (userId) => {
-          await axios.patch(`/api/issues/${issue.id}`, {
-            assignedToUserId: userId == "Unassigned" ? null : userId,
-          })
-          .then(()=> toast.success('Issue Assigned Successfully'))
-          .catch(()=> toast.error('Issue Could not be Assigned.'));
-        }}
+        onValueChange={(userId) => handelAssignUsers(userId)}
       >
         <Select.Trigger placeholder={"Assign..."} />
         <Select.Content>
@@ -50,5 +44,10 @@ const AssigneeSelect = ({ issue }: { issue: issue }) => {
     </>
   );
 };
-
+const useUsers = () => useQuery<User[]>( {
+    queryKey: ["users"],
+    queryFn: () => axios.get("/api/users").then((res) => res.data),
+    staleTime: 60 * 1000, //60s
+    retry: 3,
+  })
 export default AssigneeSelect;
