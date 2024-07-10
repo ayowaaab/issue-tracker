@@ -7,8 +7,8 @@ interface IParams {
   params: { id: string };
 }
 export async function PATCH(request: Request, { params: { id } }: IParams) {
-  // const session = await getServerSession();
-  // if (!session) return NextResponse.json({}, { status: 401 });
+  const session = await getServerSession();
+  if (!session) return NextResponse.json({}, { status: 401 });
   try {
     const body = await request.json();
     const validation = patchIssueSchema.safeParse(body);
