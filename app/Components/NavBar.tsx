@@ -69,13 +69,13 @@ const NavLinks = () => {
   ];
   const currentPath = usePathname();
   return (
-    <>
+    <Flex gap={"3"} align={"end"}>
       <Link href="/" className="mr-6">
         <Image src="/IssueLogo.png" alt="logo" height={100} width={100} />
       </Link>
       <ul className="flex space-x-5">
         {links.map((link) => (
-          <li key={link.href}>
+          <li className="p-0 m-0" key={link.href}>
             <Link
               className={classnames({
                 "nav-link": link.href !== currentPath,
@@ -88,7 +88,7 @@ const NavLinks = () => {
           </li>
         ))}
       </ul>
-    </>
+    </Flex>
   );
 };
 export default NavBar;

@@ -1,12 +1,12 @@
 import { Skeleton } from "@/app/components";
-import { Table } from "@radix-ui/themes";
+import { Container, Table } from "@radix-ui/themes";
 import Filter from "../components/Filter";
 import IssueAction from "../components/IssueAction";
 const LoadingIssuesPage = () => {
-  const issues = [1, 2, 3];
+  const issues = [1, 2, 3, 4, 5, 6];
   return (
     <>
-      <div>
+      <Container>
         <div className="flex justify-between mb-5">
           <Filter />
           <IssueAction />
@@ -39,7 +39,7 @@ const LoadingIssuesPage = () => {
             ))}
           </Table.Body>
         </Table.Root>
-      </div>
+      </Container>
     </>
   );
 };

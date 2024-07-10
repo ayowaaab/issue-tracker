@@ -4,16 +4,15 @@ import { notFound } from "next/navigation";
 import React from "react";
 import IssueFormSkeleton from "../../_components/IssueFormSkeleton";
 
-const IssueForm = dynamic(import("../../_components/IssueForm"), {
+
+const   IssueForm = dynamic(()=> import("../../_components/IssueForm"), {
   ssr: false,
   loading: () => <IssueFormSkeleton />,
 });
 
-interface IParams {
-  params: { id: string };
-}
 
-const EditIssuePage: React.FC<IParams> = async ({ params }) => {
+
+const EditIssuePage = async ({ params }: { params: { id: string } }) => {
   const issue = await prisma.issue.findUnique({
     where: {
       id: parseInt(params.id),
@@ -22,9 +21,9 @@ const EditIssuePage: React.FC<IParams> = async ({ params }) => {
   if (!issue) notFound();
 
   return (
-    <div>
+    <>
       <IssueForm issue={issue} />
-    </div>
+    </>
   );
 };
 
