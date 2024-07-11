@@ -1,3 +1,5 @@
+import { Box, Container, Grid } from "@radix-ui/themes";
+import IssueChart from "./components/IssueChart";
 import IssueSummary from "./components/IssueSummary";
 import LatestIssues from "./components/LatestIssues";
 import prisma from "@/prisma/db";
@@ -19,14 +21,23 @@ const Dashboard = async () => {
     },
   });
   return (
-    <>
-      <IssueSummary
-        closed={countClosed}
-        inProgress={countProgress}
-        open={countOpen}
-      />
-      <LatestIssues />
-    </>
+    <Container>
+      <Grid columns={{ initial: "1", md: "2", lg: "3" }} rows={"1"} gap={"5"}>
+        <div className="col-span-1 md:col-span-2">
+          <IssueSummary
+            closed={countClosed}
+            inProgress={countProgress}
+            open={countOpen}
+          />
+          <IssueChart
+            closed={countClosed}
+            inProgress={countProgress}
+            open={countOpen}
+          />
+        </div>
+        <LatestIssues />
+      </Grid>
+    </Container>
   );
 };
 

@@ -9,16 +9,16 @@ interface Props {
 }
 const IssueSummary: React.FC<Props> = ({ closed, inProgress, open }) => {
   const statuses: { label: string; value: number; status: Status }[] = [
-    { label: "Open Issue", value: open, status: "OPEN" },
-    { label: "Closed", value: inProgress, status: "IN_PROGRESS" },
-    { label: "Open Issue", value: closed, status: "CLOSED" },
+    { label: "Open Issues", value: open, status: "OPEN" },
+    { label: "In Progress Issues", value: inProgress, status: "IN_PROGRESS" },
+    { label: "Closed Issues", value: closed, status: "CLOSED" },
   ];
   return (
     <Container mb={"5"}>
-      <Flex gap={"3"}>
+      <Flex gap={"3"} justify={{initial:"center",lg:"start"}} >
         {statuses.map((val) => (
           <Link href={`/issues?status=${val.status}`}>
-            <Card>
+            <Card className="min-w-full">
               <Flex direction={"column"}>
                 <Text>{val.label}</Text>
                 <Text size={"5"} className="font-bold">
