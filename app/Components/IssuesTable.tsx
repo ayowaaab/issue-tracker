@@ -11,6 +11,59 @@ const IssuesTable = async ({ issues }: { issues: issue[] }) => {
   return <FullTable issues={issues} />;
 };
 
+const FullTable = ({ issues }: { issues: issue[] }) => {
+  const search = useSearchParams();
+  const exist = search.get("status");
+  const sorted = "sortedBy=";
+  return (
+    <>
+      <Table.Root variant="surface">
+
+        <Table.Header>
+          <Table.Row>
+            {columns.map((val) => (
+              <Table.ColumnHeaderCell key={val.label} className={val.className}>
+                <NextLink
+                  href={
+                    exist
+                      ? `/issues/?status=${exist + "&" + sorted + val.value}`
+                      : "?" + sorted + val.value
+                  }
+                >
+                  {val.label}{" "}
+                  {val.value == search.get("sortedBy") && (
+                    <ArrowUpIcon className="inline" />
+                  )}
+                </NextLink>
+              </Table.ColumnHeaderCell>
+            ))}
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
+          {issues.map((issue) => (
+            <Table.Row key={issue.id}>
+              <Table.RowHeaderCell>
+                <div className="flex gap-5">
+                  <Link href={`/issues/${issue.id}`}>{issue.title}</Link>
+                  <div className="md:hidden">
+                    <BadgeIssue status={issue.status} />
+                  </div>
+                </div>
+              </Table.RowHeaderCell>
+              <Table.Cell className="hidden md:table-cell">
+                <BadgeIssue status={issue.status} />
+              </Table.Cell>
+              <Table.Cell className="hidden md:table-cell">
+                {issue.createdAt.toDateString()}
+              </Table.Cell>
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table.Root>
+    </>
+  );
+  
+};
 
 const EmptyTable = () => {
   return (
@@ -36,73 +89,17 @@ const EmptyTable = () => {
   );
 };
 
-const FullTable = ({ issues }: { issues: issue[] }) => {
-  const search = useSearchParams();
-  const exist = search.get("status");
-  const sorted = "sortedBy=";
-  const columns: { className?: string; label: string; value: keyof issue }[] = [
-    { className: "cursor-pointer", label: "Issue", value: "title" },
-    {
-      className: "hidden md:table-cell cursor-pointer",
-      label: "Status",
-      value: "status",
-    },
-    {
-      className: "hidden md:table-cell cursor-pointer",
-      label: "Created At",
-      value: "createdAt",
-    },
-  ];
-  return (
-    <>
-      <Table.Root variant="surface">
-
-        <Table.Header>
-          <Table.Row>
-            {columns.map((val) => (
-              <Table.ColumnHeaderCell key={val.label} className={val.className}>
-                <NextLink
-                  href={
-                    exist
-                      ? `/issues/?status=${exist + "&" + sorted + val.value}`
-                      : "?" + sorted + val.value
-                  }
-                >
-                  {val.label}{" "}
-                  {val.value == search.get("sortedBy") && (
-                    <ArrowUpIcon className="inline" />
-                  )}
-                </NextLink>
-              </Table.ColumnHeaderCell>
-            ))}
-          </Table.Row>
-        </Table.Header>
-
-        <Table.Body>
-
-          {issues.map((issue) => (
-            <Table.Row key={issue.id}>
-              <Table.RowHeaderCell>
-                <div className="flex gap-5">
-                  <Link href={`/issues/${issue.id}`}>{issue.title}</Link>
-                  <div className="md:hidden">
-                    <BadgeIssue status={issue.status} />
-                  </div>
-                </div>
-              </Table.RowHeaderCell>
-              <Table.Cell className="hidden md:table-cell">
-                <BadgeIssue status={issue.status} />
-              </Table.Cell>
-              <Table.Cell className="hidden md:table-cell">
-                {issue.createdAt.toDateString()}
-              </Table.Cell>
-            </Table.Row>
-          ))}
-        </Table.Body>
-
-      </Table.Root>
-    </>
-  );
-};
-
+const columns: { className?: string; label: string; value: keyof issue }[] = [
+  { className: "cursor-pointer", label: "Issue", value: "title" },
+  {
+    className: "hidden md:table-cell cursor-pointer",
+    label: "Status",
+    value: "status",
+  },
+  {
+    className: "hidden md:table-cell cursor-pointer",
+    label: "Created At",
+    value: "createdAt",
+  },
+];
 export default IssuesTable;
