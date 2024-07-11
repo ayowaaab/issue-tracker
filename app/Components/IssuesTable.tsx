@@ -56,6 +56,7 @@ const FullTable = ({ issues }: { issues: issue[] }) => {
   return (
     <>
       <Table.Root variant="surface">
+
         <Table.Header>
           <Table.Row>
             {columns.map((val) => (
@@ -78,6 +79,7 @@ const FullTable = ({ issues }: { issues: issue[] }) => {
         </Table.Header>
 
         <Table.Body>
+
           {issues.map((issue) => (
             <Table.Row key={issue.id}>
               <Table.RowHeaderCell>
@@ -97,6 +99,7 @@ const FullTable = ({ issues }: { issues: issue[] }) => {
             </Table.Row>
           ))}
         </Table.Body>
+
       </Table.Root>
     </>
   );
