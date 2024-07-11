@@ -1,8 +1,9 @@
-import { Box, Container, Grid } from "@radix-ui/themes";
+import prisma from "@/prisma/db";
+import { Container, Grid } from "@radix-ui/themes";
+import { Metadata } from "next";
 import IssueChart from "./components/IssueChart";
 import IssueSummary from "./components/IssueSummary";
 import LatestIssues from "./components/LatestIssues";
-import prisma from "@/prisma/db";
 
 const Dashboard = async () => {
   const countOpen = await prisma.issue.count({
@@ -42,3 +43,8 @@ const Dashboard = async () => {
 };
 
 export default Dashboard;
+
+export const metadata: Metadata = {
+  title: "ITracker | Dashboard",
+  description: "View a Summary of Project Issues",
+};

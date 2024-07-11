@@ -5,6 +5,7 @@ import Filter from "../components/Filter";
 import IssueAction from "../components/IssueAction";
 import IssuesTable from "../components/IssuesTable";
 import Pagination from "../components/Pagination";
+import { Metadata } from "next";
 
 interface Props {
   searchParams: { status: Status; sortedBy: string; page: string };
@@ -47,3 +48,8 @@ const IssuePage = async ({ searchParams }: Props) => {
 };
 export const dynamic = "force-dynamic";
 export default IssuePage;
+
+export const metadata: Metadata = {
+  title: "ITracker | IssuesPage",
+  description: "View The Issues and Assigned to Users",
+};

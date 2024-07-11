@@ -1,4 +1,5 @@
 import { Box, Heading } from "@radix-ui/themes";
+import { Metadata } from "next";
 import Image from "next/image";
 
 const page = () => {
@@ -29,3 +30,8 @@ const page = () => {
 };
 
 export default page;
+
+export const metadata: Metadata = {
+  title: "ITracker | HomePage",
+  description: "View The Home Page",
+};
