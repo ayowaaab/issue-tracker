@@ -1,4 +1,4 @@
-import { Box, Heading, Text } from "@radix-ui/themes";
+import { Box, Heading } from "@radix-ui/themes";
 import Image from "next/image";
 
 const page = () => {

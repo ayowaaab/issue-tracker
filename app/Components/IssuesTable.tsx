@@ -1,6 +1,7 @@
 "use client";
 import { BadgeIssue, Link } from "@/app/components";
 import { issue } from "@prisma/client";
+import { ArrowUpIcon } from "@radix-ui/react-icons";
 import { Table } from "@radix-ui/themes";
 import NextLink from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -9,6 +10,7 @@ const IssuesTable = async ({ issues }: { issues: issue[] }) => {
   if (issues.length == 0) return <EmptyTable />;
   return <FullTable issues={issues} />;
 };
+
 
 const EmptyTable = () => {
   return (
@@ -65,7 +67,10 @@ const FullTable = ({ issues }: { issues: issue[] }) => {
                       : "?" + sorted + val.value
                   }
                 >
-                  {val.label}
+                  {val.label}{" "}
+                  {val.value == search.get("sortedBy") && (
+                    <ArrowUpIcon className="inline" />
+                  )}
                 </NextLink>
               </Table.ColumnHeaderCell>
             ))}

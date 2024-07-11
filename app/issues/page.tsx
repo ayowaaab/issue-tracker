@@ -6,7 +6,7 @@ import prisma from "@/prisma/db";
 import { issue, Status } from "@prisma/client";
 
 interface Props {
-  searchParams: { status: Status };
+  searchParams: { status: Status; sortedBy: string };
 }
 
 const IssuePage = async ({ searchParams }: Props) => {
@@ -16,9 +16,14 @@ const IssuePage = async ({ searchParams }: Props) => {
     ? searchParams.status
     : undefined;
 
+  const orderBy = ["title", "status", "createdAt"].includes(
+    searchParams.sortedBy
+  )
+    ? { [searchParams.sortedBy]: "asc" }
+    : undefined;
 
   const issues = await prisma.issue.findMany({
-    orderBy: { createdAt: "desc" },
+    orderBy,
     where: { status: statue },
   });
 
