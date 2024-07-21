@@ -1,36 +1,91 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Issue Tracker
+This project is an Issue Tracker built following the tutorial by Mosh Hammedani. It allows users to track issues, assign them to users, and manage their status.
+## Table of Contents
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Technologies Used](#technologies-used)
+- [Demo](#demo)
+- [Contact](#contact)
 
-## Getting Started
+## Features
 
-First, run the development server:
+- User authentication and authorization
+- Create, read, update, and delete issues
+- Assign issues to users
+- Track the status of issues
+- User-friendly interface
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Installation
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. Clone the repository:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+   ```bash
+   git clone https://github.com/yourusername/issue-tracker.git
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd issue-tracker
+   ```
+3. Install dependencies:
+   ```bash
+    npm install
+   ```
+4. Set up the environment variables. Create a .env file in the root directory and add the following:
+    ```bash
+    DATABASE_URL=your_database_url
+    JWT_SECRET=your_jwt_secret
+    ```
+5. Run database migrations:
+    ```bash
+    npx prisma migrate dev --name init
+    ```
+6. Start the development server:
+    ```bash
+    npm run dev
+    ```
+## Usage 
+1. Open your web browser and go to http://localhost:3000.
+2. Register a new account or log in with an existing one.
+3. Start tracking issues by creating, assigning, and updating their statuses.
+   
+## Technologies Used
+- Nextjs
+- NextAuth (Google Authentification)
+- React
+- MySql 
+- Prisma (ORM)
+- JWT for authentication
+- Radix-UI for UI components
+- TailwindCSS for styling
+  
+## Demo
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Home Page
+![image](https://github.com/user-attachments/assets/b1b58848-2563-44dd-bf8c-53c15e9d9553)
 
-## Learn More
+### Dashboard Page
+![image](https://github.com/user-attachments/assets/c17e568a-10f1-4477-bb92-46968da810db)
 
-To learn more about Next.js, take a look at the following resources:
+### Issues Page
+![image](https://github.com/user-attachments/assets/2823b922-4546-48af-a830-41fd1cef6f8d)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Adding New issue
+![image](https://github.com/user-attachments/assets/4022f5de-f8b5-4147-8b74-9c24e693b7b0)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Preview Page
+![image](https://github.com/user-attachments/assets/9628084a-d2b5-4ece-9436-7612032fb3e9)
 
-## Deploy on Vercel
+### Assigning new issue to user
+![image](https://github.com/user-attachments/assets/cb806bea-c752-42c3-8faf-a1827b16494a)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### New issue deisplayed in Dashboard
+![image](https://github.com/user-attachments/assets/55ad88d7-168b-452a-8d7e-911d4955daa3)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Contact
+For any inquiries or feedback, please reach out to:
+
+- **Name**: Ayoub Dahmen
+- **Email**: ayoub1dahmen@gmail.com
+- **GitHub**: ayowaaab
+  
